@@ -1,0 +1,5 @@
+---
+- name: "nvim dein"
+  command: >
+    nvim '+call dein#install()' '+qall'
+  when: limited_internet is not defined

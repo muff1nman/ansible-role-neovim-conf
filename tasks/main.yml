@@ -1,0 +1,16 @@
+---
+- name: Bootstrap dein
+  git:
+    repo: "https://github.com/Shougo/dein.vim"
+    dest: "{{ desktop_user_vars.dir }}/.local/share/repos/github.com/Shougo/dein.vim"
+    update: no # should be managed itself
+- name: Setup nvim config dir
+  file:
+    state: directory
+    path: "{{ desktop_user_vars.dir }}/.config/nvim"
+- name: Setup init.vim
+  copy:
+    src: init.vim
+    dest: "{{ desktop_user_vars.dir }}/.config/nvim/init.vim"
+  notify:
+    - "nvim dein"
