@@ -14,9 +14,11 @@ if dein#load_state('~/.local/share/')
   " Required:
   call dein#add('~/.local/share/repos/github.com/Shougo/dein.vim')
 
-  " Add or remove your plugins here like this:
-  "call dein#add('Shougo/neosnippet.vim')
-  "call dein#add('Shougo/neosnippet-snippets')
+  " Additional plugins
+  call dein#add('autozimu/LanguageClient-neovim', {
+    \ 'rev': 'next',
+    \ 'build': 'bash install.sh',
+    \ })
 
   " Required:
   call dein#end()
@@ -34,3 +36,14 @@ syntax enable
 
 "End dein Scripts-------------------------
 
+" begin languageclient config
+set hidden
+
+let g:LanguageClient_serverCommands = {
+  \ 'cpp': ['clangd'],
+  \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+" end   languageclient config
